@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h3 class="modal-title">登入</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-success text-center" 
+                 style="font-size:16px; padding-top: 10px; padding-bottom: 10px;"
+                 ng-show="isLogin">登入成功</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-block btn-social btn-facebook" ng-click="facebookLogin()">
+                <span class="fa fa-facebook"></span> FB 登入
+            </a>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-xs-12">
+            <a class="btn btn-block btn-social btn-google" ng-click="googleLogin()">
+                <span class="fa fa-google"></span> Google 登入
+            </a>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="row text-center">
+        <div class="col-sm-12">
+            <button class="btn btn-warning btn-block" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</div>

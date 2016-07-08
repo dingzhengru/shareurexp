@@ -1,0 +1,56 @@
+
+<div ng-include src="templates.userArticlesTemplate"></div>
+
+<!--<div class="articles-rows" ng-repeat="article in articlesArray | filterBySpace: searchArticle: ['title', 'keywords']">-->
+<!--    <div class="col-md-8">-->
+<!--        <a class="article-title" ui-sref="article({ articleID: article.$id })">{{ article.title }}</a>-->
+<!--        <div> 作者: <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a></div>-->
+<!--        <div class="row">-->
+            
+            <!-- 標籤 -->
+<!--            <div class="col-sm-7 col-md-7" style="padding: 10px;">-->
+<!--                <div class="article-tags">-->
+<!--                    <span class="glyphicon glyphicon-tags"></span>-->
+<!--                    <a href="" smooth-scroll-jquery target="article-search-wrapper" speed="1000" style="text-decoration: none;">-->
+<!--                        <span class="label label-info font-default" -->
+<!--                              ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" -->
+<!--                              ng-click="searchArticleByTag(tag.name)"-->
+<!--                              style="margin-right: 10px;cursor:pointer;">-->
+<!--                            {{ tag.name }}-->
+<!--                        </span>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+            
+            <!-- 推、噓、留言、時間 -->
+<!--            <div class="col-sm-5 col-md-5 hidden-md hidden-lg" style="padding: 10px;">-->
+<!--                <span class="fa fa-thumbs-up fa-1x"></span> {{ article.pushUserIDs.length || 0}}-->
+<!--                <span class="fa fa-thumbs-down fa-1x"></span> {{ article.booUserIDs.length || 0}}-->
+<!--                <span class="fa fa-comment fa-1x"></span> {{ article.comments.length || 0 }} 留言-->
+<!--                <span class="fa fa-clock-o fa-1x"></span> {{ article.created }}-->
+<!--            </div>-->
+<!--            <div class="col-sm-5 col-md-5 hidden-sm hidden-xs text-right" style="padding: 10px;">-->
+<!--                <span class="fa fa-thumbs-up fa-1x"></span> {{ article.pushUserIDs.length || 0}}-->
+<!--                <span class="fa fa-thumbs-down fa-1x"></span> {{ article.booUserIDs.length || 0}}-->
+<!--                <span class="fa fa-comment fa-1x"></span> {{ article.comments.length || 0 }} 留言-->
+<!--                <span class="fa fa-clock-o fa-1x"></span> {{ article.created }}-->
+<!--            </div>-->
+<!--        </div>-->
+        
+        <!-- 內容 -->
+<!--        <div class="article-content row" style="padding: 10px;">-->
+<!--            <span ng-bind-html="cutArticleContent(article.content) | limitTo: 225" class="font-default"></span>-->
+<!--        </div>-->
+        
+        <!-- 按鈕 -->
+<!--        <div class="text-right  row" style="padding: 10px;">-->
+<!--            <button class="hidden-xs hidden-sm btn btn-default btn-lg" ui-sref="article({ articleID: article.$id })">閱讀全文</button>-->
+<!--            <button class="hidden-lg hidden-md btn btn-default btn-block" ui-sref="article({ articleID: article.$id })">閱讀全文</button>-->
+<!--        </div>-->
+        
+<!--        <hr ng-show="!$last">-->
+<!--        <br ng-show="$last">-->
+<!--    </div>-->
+<!--</div>-->
+
+

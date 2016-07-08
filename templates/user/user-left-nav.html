@@ -1,0 +1,97 @@
+
+<div class="hidden-lg hidden-md user-info-sm-xs-wrapper">
+    <div class="">
+        <div class="col-xs-12 col-sm-3 avatar-wrapper" class="hidden-lg hidden-md">
+            <img ng-src="{{ user.profileImageURL }}" class="img-responsive img-rounded center-block" style="min-height:150px;"></img>
+        </div>
+            <!--<div>使用者名稱 {{ user.displayName }}</div>-->
+        <div class="table-responsive table-wrapper">
+            <table class="table table-custom-striped">
+                <tr>
+                    <td>使用者ID</td>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <td>使用者名稱</td>
+                    <td>{{ user.displayName }}</td>
+                </tr>
+                <tr>
+                    <td>性別</td>
+                    <td>{{ user.cachedUserProfile.gender == 'male' ? '男' : '女' }}</td>
+                </tr>
+                <tr>
+                    <td>信箱</td>
+                    <td>{{ user.email}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr class="hidden-lg hidden-md">
+
+<div class="col-md-12 hidden-lg hidden-md user-collapse-button-wrapper"  ng-init="isListCollapse = true" >
+    <button class="btn btn-default btn-block" ng-click="isListCollapse = !isListCollapse">
+        <i class="fa fa-user fa-2x"></i>
+        <span class="caret"></span>
+    </button>
+</div>
+
+<!-- Collapse -->
+<div class="col-md-12 hidden-lg hidden-md user-collapse-content-wrapper" uib-collapse="isListCollapse">
+    <!--<ul class="list-group font-lg custom-list" ng-click="isListCollapse = !isListCollapse">-->
+    <ul class="list-group font-lg custom-list">
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.articles')}" ui-sref="user.articles">
+            你的文章
+        </li>
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.push-articles')}" ui-sref="user.push-articles">
+            推過的文章
+        </li>
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.notifications')}" ui-sref="user.notifications" ng-show="isAuthSelf(user.uid)">
+            所有通知
+        </li>
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.profile')}" ui-sref="user.profile" ng-show="isAuthSelf(user.uid)">
+            你的資料
+        </li>
+    </ul>
+</div>
+
+<!-- md, lg 顯示下面這個 -->
+
+<div class="hidden-xs hidden-sm user-info-md-lg-wrapper">
+    <img ng-src="{{ user.profileImageURL }}" class="img-responsive img-rounded avatar"></img>
+    <div class="table-responsive table-wrapper">
+        <table class="table table-custom-striped">
+            <tr>
+                <th>使用者ID</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>使用者名稱</th>
+                <td>{{ user.displayName }}</td>
+            </tr>
+            <tr>
+                <th>性別</th>
+                <td>{{ user.cachedUserProfile.gender == 'male' ? '男' : '女' }}</td>
+            </tr>
+            <tr>
+                <th>信箱</th>
+                <td>{{ user.email}}</td>
+            </tr>
+        </table>
+    </div>
+    <ul class="list-group font-lg user-nav">
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.articles')}" ui-sref="user.articles">
+            你的文章
+        </li>
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.push-articles')}" ui-sref="user.push-articles">
+            推過的文章
+        </li>
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.notifications')}" ui-sref="user.notifications" ng-show="isAuthSelf(user.uid)">
+            所有通知
+        </li>
+        <li class="list-group-item clickable" ng-class="{active: isStateActive('user.profile')}" ui-sref="user.profile" ng-show="getUserProfile().uid == user.uid">
+            你的資料
+        </li>
+    </ul>
+</div>

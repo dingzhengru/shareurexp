@@ -1,0 +1,66 @@
+<div class="font-lg user-notifications">
+    
+    <div class="user-article-search" id="article-search-wrapper">
+        <div class="inner-addon right-addon">
+            <i class="glyphicon glyphicon-search" style="padding:10px; font-size: 22px;"></i>
+            <input type="text" ng-model="searchNotification" class="form-control input-lg" placeholder="搜尋通知"/>
+        </div>
+    </div>
+    
+    <div class="row" style="">
+        <div class="col-md-12">
+           <div class="alert alert-info text-center">此頁面只有自己看的到</div>
+        </div>
+    </div>
+    
+    <!--alert -->
+
+    <div class="alert alert-info text-center" ng-show="user.notifications.length <= 0">無任何通知</div>
+    
+    <!--alert -->
+    
+    
+    <div class="text-right" ng-show="!isMobile.any()">
+        <uib-pagination total-items="(user.notifications | filterBySpace: searchNotification: ['title', 'created']).length"
+                        items-per-page="pageSize"     
+                        ng-model="currentPage"
+                        max-size="maxSize"
+                        class="pagination-sm"
+                        boundary-link-numbers="true"
+                        previous-text="上一頁"
+                        next-text="下一頁">
+            
+        </uib-pagination>
+    </div>
+    
+    <div class="table-responsive" ng-show="user.notifications.length > 0">
+        <table class="table table-bordered table-hover">
+            <tr class="active">
+                <th></th>
+                <th>通知內容</th>
+                <th>時間</th>
+            </tr>
+            <tr ng-repeat="notification in user.notifications | filterBySpace: searchNotification: ['title', 'created']
+                                                              | orderBy: created: true
+                                                              | limitTo: pageSize : pageStartItem(pageSize, currentPage)">
+                <td>{{ $index }}</td>
+                <td><a ui-sref="article({ articleID: notification.articleID })">{{ notification.title }}</a></td>
+                <td>{{ notification.created }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    
+    <div class="text-right" ng-show="!isMobile.any()" style="margin-top: 5px;">
+        <uib-pagination total-items="(user.notifications | filterBySpace: searchNotification: ['title', 'created']).length"
+                        items-per-page="pageSize"     
+                        ng-model="currentPage"
+                        max-size="maxSize"
+                        class="pagination-sm"
+                        boundary-link-numbers="true"
+                        previous-text="上一頁"
+                        next-text="下一頁">
+            
+        </uib-pagination>
+    </div>
+</div>

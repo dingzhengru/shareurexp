@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" ng-controller="MainController" ng-init="init()">
+<head >
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle }} | ShareUrEXP</title>
+    
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />-->
+    
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />-->
+    
+    <!-- bootstrap-social -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css">
+    <!--<link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.min.css" />-->
+    <!--<link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />-->
+    
+    <!-- AngularText -->
+    <link rel='stylesheet' href='/bower_components/textAngular/dist/textAngular.css'>
+    
+    <!-- angular-multiple-select -->
+    <link rel="stylesheet" href="/bower_components/angularMultipleSelect/build/multiple-select.min.css" >
+
+    <!-- animation.css -->
+    <link rel="stylesheet" href="css/animation.css">
+    
+    <!-- my style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div ng-include src="templates.nav"></div>
+    
+    <div class="wrapper view-fade" ng-class="{ 'home-wrapper': isStateActive('home') }" ui-view></div>
+    
+    <div ng-include src="templates.loading" ng-show="!isLoaded" class="loading-div"></div>
+    
+    <div ng-include src="templates.footer" ng-show="isLoaded && !isStateActive('home')"></div>
+    
+    <!-- SystemJs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.29/system.js"></script>
+    <!--<script src="node_modules/systemjs/dist/system.js"></script>-->
+    
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
+    
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!--<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    
+    <!-- Firebase -->
+    <!--<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>-->
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+    <!--<script src="bower_components/firebase/firebase.js"></script>-->
+
+    <!-- Angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/1.2.0/angularfire.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
+    
+    <!--<script src="bower_components/angular/angular.min.js"></script>-->
+    <!--<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>-->
+    <!--<script src="bower_components/angular-animate/angular-animate.min.js"></script>-->
+    <!--<script src="bower_components/angularfire/dist/angularfire.min.js"></script>-->
+    <!--<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>-->
+    <!--<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
+    <!--<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>-->
+    <!--<script src="bower_components/ngstorage/ngStorage.min.js"></script>-->
+    <script src="bower_components/angular-smoothscroll/dist/scripts/bb15da28.scripts.js"></script>
+    
+    <!-- AngularText -->
+    <!-- textAngular-sanitize 此檔案 跟  angular-sanitize 一樣 但作者推薦前者-->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-rangy.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-sanitize.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js'></script>
+    <!--<script src='/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>-->
+    <!--<script src='/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>-->
+    <!--<script src='/bower_components/textAngular/dist/textAngular.min.js'></script>-->
+    
+    <!-- angular-multiple-select 這個我有自己修改過 -->
+    <script src="/bower_components/angularMultipleSelect/build/multiple-select.js"></script>
+    
+    <!-- angular-bootstrap-checkbox (ui.checkbox) -->
+    <script src="/bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
+    
+    <!-- moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment-with-locales.min.js"></script>
+    <!--<script src="/bower_components/moment/min/moment-with-locales.min.js"></script>-->
+    
+  
+    <script>
+        
+        // var firebaseConfig = {
+        //     apiKey: "AIzaSyCOOYFQFK8uls8vphzxojcRmP6rE7hsY5U",
+        //     authDomain: "project-1513217395707511888.firebaseapp.com",
+        //     databaseURL: "https://project-1513217395707511888.firebaseio.com",
+        //     storageBucket: "project-1513217395707511888.appspot.com",
+        // };
+        // firebase.initializeApp(firebaseConfig);
+        
+        // var googleProvider = new firebase.auth.GoogleAuthProvider();
+        // googleProvider.addScope('profile, email');
+        
+        // var facebookProvider = new firebase.auth.FacebookAuthProvider();
+        // facebookProvider.addScope('public_profile, email');
+        
+        var ref = new Firebase('https://shareurexp.firebaseio.com');
+        var researchRef = ref.child('universityResearch');
+        var tagsRef = researchRef.child('tags');
+        var articlesRef = researchRef.child('articles');
+        var usersRef = researchRef.child('users');
+        
+        // var researchRef = firebase.database().ref();
+        // var tagsRef = firebase.database().ref('tags');
+        // var articlesRef = firebase.database().ref('articles');
+        // var usersRef = firebase.database().ref('users');
+        
+        System.config({
+            baseURL: '/'
+        });
+        System.import('modules/main.js').then(function() {
+            
+        });
+        
+    </script>
+</body>
+</html>

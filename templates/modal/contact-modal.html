@@ -1,0 +1,38 @@
+
+<div class="modal-header">
+    <h3 class="modal-title">聯絡我們</h3>
+</div>
+<div class="modal-body" style="padding: 20px;">
+    <form id="contact-form" class="contact-form" ng-submit="ok()">
+        <div class="row">
+            <div class="col-xs-12" style="padding-bottom: 20px;">
+                暱稱<input type="text" ng-model="contact.username" class="form-control" ng-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="padding-bottom: 20px;">
+                標題<input type="text" ng-model="contact.title" class="form-control" ng-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12" style="padding-bottom: 20px;">
+                <text-angular ng-model="contact.content"
+                              ta-toolbar="taOptions.toolbar"
+                              required>
+                    
+                </text-angular>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="row text-center">
+        <div class=" col-md-3 col-md-offset-6 col-sm-12" style="margin-bottom: 10px;">
+            <button class="btn btn-primary btn-block" type="submit" form="contact-form">送出</button>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <button class="btn btn-default btn-block" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+    <div class="alert alert-success text-center" ng-show="isSendSuccess">送出成功</div>
+</div>

@@ -1,0 +1,147 @@
+
+<div ng-include src="templates.userArticlesTemplate"></div>
+
+<!--<div class="user-article-search" id="article-search-wrapper">-->
+<!--    <div class="inner-addon right-addon">-->
+<!--        <i class="glyphicon glyphicon-search" style="padding:10px; font-size: 22px;"></i>-->
+<!--        <input type="text" ng-model="searchUserArticle" class="form-control input-lg" placeholder="搜尋文章"/>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--loading -->
+
+<!--<div ng-include src="templates.loading" style="padding-top: 100px;" ng-show="!searchUserArticle && (articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']).length <= 0" ></div>-->
+
+<!--loading -->
+
+<!--<div class="table-responsive" ng-show="articlesArray.length > 0">-->
+<!--    <table class="table table-bordered table-hover">-->
+<!--        <thead style="background: #E6E6E6;">-->
+<!--            <tr class="info">-->
+<!--                <th>標題</th>-->
+<!--                <th>標籤</th>-->
+<!--                <th>推</th>-->
+<!--                <th>噓</th>-->
+<!--                <th>留言</th>-->
+<!--                <th>發表時間</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tr ng-repeat="article in articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']">-->
+<!--            <td>{{ article.title }}</td>-->
+<!--            <td>-->
+<!--                <a href="" smooth-scroll-jquery target="article-search-wrapper" speed="1000" style="text-decoration: none;">-->
+<!--                    <span class="label label-info font-default" -->
+<!--                          ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" -->
+<!--                          ng-click="searchUserArticleByTag(tag.name)"-->
+<!--                          style="margin-right: 10px;cursor:pointer;">-->
+<!--                        {{ tag.name }}-->
+<!--                    </span>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--            <td>{{ article.pushUserIDs.length || 0 }}</td>-->
+<!--            <td>{{ article.booUserIDs.length || 0 }}</td>-->
+<!--            <td>{{ article.comments.length || 0 }}</td>-->
+<!--            <td>{{ article.created }}</td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
+
+
+<!--<div class="articles-rows" ng-repeat="article in articlesArray | filterBySpace: searchArticle: ['title', 'keywords']">-->
+<!--    <div class="col-md-8">-->
+        
+        <!--<a class="article-title" ui-sref="article({ articleID: article.$id })">{{ article.title }}</a>-->
+        <!--<div> 作者: <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a></div>-->
+        <!--<div class="row">-->
+            
+            <!-- 標籤 -->
+        <!--    <div class="col-sm-7 col-md-7" style="padding: 10px;">-->
+        <!--        <div class="article-tags">-->
+        <!--            <span class="glyphicon glyphicon-tags"></span>-->
+                    <!--<a href="" smooth-scroll-jquery target="article-search-wrapper" speed="1000" style="text-decoration: none;">-->
+                    <!--    <span class="label label-info font-default" -->
+                    <!--          ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" -->
+                    <!--          ng-click="searchArticleByTag(tag.name)"-->
+                    <!--          style="margin-right: 10px;cursor:pointer;">-->
+                    <!--        {{ tag.name }}-->
+                    <!--    </span>-->
+                    <!--</a>-->
+        <!--        </div>-->
+        <!--    </div>-->
+            
+            <!-- 推、噓、留言、時間 -->
+        <!--    <div class="col-sm-5 col-md-5 hidden-md hidden-lg" style="padding: 10px;">-->
+        <!--        <span class="fa fa-thumbs-up fa-1x"></span> {{ article.pushUserIDs.length || 0}}-->
+        <!--        <span class="fa fa-thumbs-down fa-1x"></span> {{ article.booUserIDs.length || 0}}-->
+        <!--        <span class="fa fa-comment fa-1x"></span> {{ article.comments.length || 0 }} 留言-->
+        <!--        <span class="fa fa-clock-o fa-1x"></span> {{ article.created }}-->
+        <!--    </div>-->
+        <!--    <div class="col-sm-5 col-md-5 hidden-sm hidden-xs text-right" style="padding: 10px;">-->
+        <!--        <span class="fa fa-thumbs-up fa-1x"></span> {{ article.pushUserIDs.length || 0}}-->
+        <!--        <span class="fa fa-thumbs-down fa-1x"></span> {{ article.booUserIDs.length || 0}}-->
+        <!--        <span class="fa fa-comment fa-1x"></span> {{ article.comments.length || 0 }} 留言-->
+        <!--        <span class="fa fa-clock-o fa-1x"></span> {{ article.created }}-->
+        <!--    </div>-->
+        <!--</div>-->
+        
+        <!-- 內容 -->
+        <!--<div class="article-content row" style="padding: 10px;">-->
+        <!--    <span ng-bind-html="cutArticleContent(article.content) | limitTo: 225" class="font-default"></span>-->
+        <!--</div>-->
+        
+        <!-- 按鈕 -->
+        <!--<div class="text-right  row" style="padding: 10px;">-->
+        <!--    <button class="hidden-xs hidden-sm btn btn-default btn-lg" ui-sref="article({ articleID: article.$id })">閱讀全文</button>-->
+        <!--    <button class="hidden-lg hidden-md btn btn-default btn-block" ui-sref="article({ articleID: article.$id })">閱讀全文</button>-->
+        <!--</div>-->
+        
+        <!--<hr ng-show="!$last">-->
+        <!--<br ng-show="$last">-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+<!--<div class="col-md-8" style="margin-top:0px;padding-top:0px;" id="article-search-div">-->
+<!--    <div class="inner-addon right-addon">-->
+<!--        <i class="glyphicon glyphicon-search" style="padding:10px; font-size: 22px;"></i>-->
+<!--        <input type="text" ng-model="searchUserArticle" class="form-control input-lg" placeholder="搜尋文章"/>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- loading -->
+
+<!--<div ng-include src="templates.loading" style="padding-top: 100px;" ng-show="!searchUserArticle && (articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']).length <= 0" ></div>-->
+
+<!-- loading -->
+
+<!--<div class="col-sm-8" style="margin-top:20px;" ng-if="!!searchUserArticle && (articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']).length <= 0">-->
+<!--    <div class="text-center alert alert-info font-lg">-->
+<!--        沒有搜尋到任何資料-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--參考 http://www.bootply.com/KYX5whhXoh# -->
+<!--<div class="article-list" ng-repeat="article in articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']" >-->
+<!--    <div class="col-md-8 article-row">-->
+<!--        <h1 class="article-title">{{ article.title}}</h1>-->
+<!--        <span ng-bind-html="article.content | limitTo: 300" class="font-default"></span>-->
+<!--        <span>{{ article.content.length < 300 ? '' : '...'}}</span>-->
+<!--        <div>-->
+<!--            <span class="glyphicon glyphicon-tags"></span>-->
+<!--            <a href="" smooth-scroll-jquery target="article-search-div" speed="1000" style="text-decoration: none;">-->
+<!--                <span class="label label-info font-default" -->
+<!--                      ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" -->
+<!--                      ng-click="searchUserArticleByTag(tag.name)"-->
+<!--                      style="margin-right: 10px;cursor:pointer;">-->
+<!--                    {{ tag.name }}-->
+<!--                </span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <p class="text-muted">由 <a ui-sref="user.articles({ userID: article.creator.uid })">{{ article.creator.displayName }}</a> 撰寫</p>-->
+<!--        <hr ng-show="!$last">-->
+<!--        <div ng-show="$last" style="padding-bottom:50px;"></div>-->
+<!--    </div>-->
+<!--    <div class="col-md-4"></div>-->
+<!--</div> -->

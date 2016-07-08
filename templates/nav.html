@@ -1,0 +1,62 @@
+<nav class="navbar navbar-default navbar-fixed-top" id="nav">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand pull-left" ui-sref="home">
+                <!--<img src="http://asian-antiquites.com/yahoo_site_admin/assets/images/logo1.1262132_std.png"></img>-->
+                <!-- "https://image.freepik.com/free-icon/pinterest-logo_318-10773.jpg" -->
+                <!--<img src="img/seeding-logo02.png"-->
+                <!--     class="img-responsive"-->
+                <!--     style="height:100%;">-->
+                Logo
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-nav" >
+                <li ng-class="{ active: isActive('/articles')}"><a ui-sref="articles">文章</a></li>
+                <li ng-class="{ active: isActive('/tags')}"><a ui-sref="tags">標籤</a></li>
+                <li ng-class="{ active: isActive('/post-article')}" ng-click="goAuthState('post-article')"><a href="">撰寫文章</a></li>
+            </ul>
+            
+            <form class="navbar-form navbar-left nav-article-search hidden-xs hidden-sm" ng-submit="stateGo('articles', { searchArticle: searchArticle })" ng-if="!isActive('/articles')">
+                <div class="inner-addon right-addon">
+                    <i ui-sref="articles({ searchArticle: searchArticle })" class="glyphicon glyphicon-search"></i>
+                    <input type="text" class="form-control" ng-model="searchArticle" placeholder="搜尋文章">
+                </div>
+                <button type="submit" style="display: none;"></button>
+            </form>
+            <ul class="nav navbar-nav navbar-right" >
+                <!--<li ng-class="{ active: isActive('/articles')}"><a ui-sref="articles">文章</a></li>-->
+                <!--<li ng-class="{ active: isActive('/tags')}"><a ui-sref="tags">標籤</a></li>-->
+                <!--<li ng-class="{ active: isActive('/post-article')}" ng-click="goPostArticle('post-article')"><a href="">撰寫文章</a></li>-->
+                <li><a href="" ng-show="!isAuth()" ng-click="openLoginModal('sm')">登入</a></li>
+                <li class="dropdown" ng-show="isAuth()">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <!--其他<span class="caret"></span>-->
+                        <!--<i class="fa fa-bars fa-1x"></i>-->
+                        <i class="fa fa-user fa-1x"></i>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a href="" ng-show="isAuth()">個人頁面</a></li>-->
+                        <li><a ui-sref="user.articles({userID: getAuth().uid})" ng-show="isAuth()">我的文章</a></li>
+                        <li><a ui-sref="user.push-articles({userID: getAuth().uid})" ng-show="isAuth()">推過的文章</a></li>
+                        <li><a ui-sref="user.profile({userID: getAuth().uid})" ng-show="isAuth()">使用者資料</a></li>
+                        <!--<li><a href="" ng-show="!isAuth()" ng-click="openLoginModal('sm')">登入</a></li>-->
+                        <li role="separator" class="divider" ng-show="isAuth()"></li>
+                        <li><a href="" ng-show="isAuth()" ng-click="logout()">登出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,158 @@
+<div class="container article-wrapper" ng-show="isLoaded">
+    <div class="row article-row">
+        <div class="col-md-9 article-left-wrapper">
+            <div class="article-intro text-center" style="padding-bottom:20px;">
+                <button type="button" class="btn btn-default btn-block" ng-init="isIntroCollapsed = true" ng-click="isIntroCollapsed = !isIntroCollapsed">
+                    {{ article.departments[0].name }}簡介 <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
+            	<div uib-collapse="isIntroCollapsed">
+            		<div class="well well-lg">{{ article.departments[0].introduction }}</div>
+            	</div>
+            </div>
+            <div class="article-title">{{ article.title }}</div>
+            <div class="row">
+                <div class="col-xs-6 article-creator">
+                    <i class="fa fa-user fa-1x"></i> <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <i class="fa fa-clock-o fa-1x"></i> <span class="article-created font-sm">{{ article.created | limitTo:16 }}</span>
+                    <i class="fa fa-pencil-square-o hidden-xs"></i> <span class="article-edited font-sm hidden-xs" ng-show="article.edited">{{ article.edited | limitTo:16 }}</span>
+                </div>
+            </div>
+            <!--<div class="article-creator"><i class="fa fa-user fa-1x"></i> <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a></div>-->
+            <div class="article-tags">
+                <span class="glyphicon glyphicon-tags font-xs"> </span> 
+                <span class="label label-info"
+                      ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" 
+                      ui-sref="articles({ searchArticle: tag.name })">
+                    {{ tag.name }}
+                </span>
+            </div>
+            <!--<div class="article-content font-lg" ng-bind-html="article.content"></div>-->
+            <div class="article-content font-lg" ta-bind ng-model="article.content"></div>
+            <!--<div class="article-created font-sm text-right">發表時間: {{ article.created }}</div>-->
+            <!--<div class="article-edited font-sm text-right hidden-xs hidden-sm" ng-show="article.edited">編輯時間: {{ article.edited || '' }}</div>-->
+            
+            <hr>
+            
+            <div class="row article-button-row">
+                <div class="col-md-4 col-sm-4 col-xs-6 button-div" ng-mouseover="showPushPop = true" ng-mouseleave="showPushPop = false">
+                    <button class="btn btn-success btn-block font-lg"
+                            ng-click="pushArticle(article, getAuth().uid)"
+                            popover-is-open="showPushPop && getPopverContent(article)"
+                            uib-popover="{{ getPopverContent(article) }}"
+                            popover-trigger="none">
+                         推 <span class="badge">{{ article.pushUserIDs.length || 0}}</span>
+                    </button>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-2"></div>
+                <div class="col-md-2 col-sm-2 col-xs-4 button-div" ng-show="!isAuthSelf(article.creator.uid)" ng-click="reportArticle(article)">
+                    <button class="btn btn-danger btn-block font-lg">檢舉</button>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-4 button-div" ng-show="isAuthSelf(article.creator.uid)" ui-sref="edit-article({ articleID:article.$id })">
+                    <button class="btn btn-primary btn-block font-lg">編輯</button>
+                </div>
+            </div>
+            
+            <!-- comment -->
+            
+            <div class="article-comment-wrapper">
+                <div class="row post-comment-row"  ng-show="isAuth()">
+                    <div class="col-xs-3 col-sm-1 ">
+                        <img ng-src="{{ getUserProfile().profileImageURL }}" class="img-circle block-center avatar">        
+                    </div>
+                    <div class="col-xs-9 col-sm-11 article-comment">
+                        <form id="comment-form" ng-submit="postComment(article, articleComment || '')">
+                            <text-angular ta-toolbar="[]" 
+                                          ng-model="articleComment"
+                                          placeholder="新增留言">
+                            
+                            </text-angular>
+                        </form>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-xs-offset-8" style="padding-top: 10px; padding-bottom: 10px;">
+                        <button type="submit" class="btn btn-primary btn-block" form="comment-form">發表</button>
+                    </div>
+                </div>
+                
+                <div class="alert alert-success text-center" ng-show="isPostArticleComment">發表成功</div>
+                
+                <hr>
+                
+                <!--comment-list -->
+                
+                <div class="alert alert-info text-center font-lg" ng-show="!article.comments">還沒有任何留言</div>
+                
+                <div class="row comment-list-row" ng-repeat="comment in article.comments" style="">
+                    <div class="col-xs-3 col-sm-1 comment-user-img">
+                        <img ng-src="{{ comment.creator.profileImageURL }}" class="img-circle block-center avatar">        
+                    </div>
+                    <div class="col-xs-9 col-sm-11" style="padding-left: 20px;">
+                        <p class="font-default">
+                            <a ui-sref="user.articles({ userID: comment.creator.uid })">{{ comment.creator.displayName }}</a> 
+                            <span class="font-xxs" ng-show="!isMobile.any()">{{ comment.created }}</span>
+                        </p>
+                        <div ng-bind-html="comment.content" class="conetnt comment-content"></div>
+                        <!--<span>{{ article.content.length > 500 ? '顯示完整內容' : ''}}</span>-->
+                        <span class="font-xxs" ng-show="isMobile.any()">{{ comment.created }}</span>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm article-right-side">
+            <div class="panel panel-default" ng-init="isPanelCollapsed[0] = true">
+                <div class="panel-heading clickable" ng-click="isPanelCollapsed[0] = !isPanelCollapsed[0]">
+                    <span class="panel-title">本科系熱門文章</span>
+                    <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[0]"></span>
+                    <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[0]"></span>
+                </div>
+                <div class="panel-content font-lg" uib-collapse="isPanelCollapsed[0]">
+                    <table class="table table-condensed table-hover no-margin">
+                        <tr class="clickable" ui-sref="article({ articleID:article.$id })" ng-repeat="article in articlesArray | filterBySpace: article.departments[0].name: ['keywords']
+                                                                                                                               | orderBy: ['pushUserIDs.length || 0', 'comments.length || 0', 'created']: true 
+                                                                                                                               | limitTo: 30">
+                            <td class="title hidden-md font-lg vert-align" style="width:55%;">{{ article.title | limitTo: 13 }} {{ article.title.length > 13 ? '...' : '' }}</td>
+                            <td class="title hidden-lg font-lg vert-align" style="width:35%;">{{ article.title | limitTo: 7 }} {{ article.title.length > 7 ? '...' : '' }}</td>
+                            <td class="vert-align" style="width:30%;">
+                                <span class="label label-default font-sm padding-5">
+                                    {{ article.departments[0].name }}
+                                </span>
+                            </td>
+                            <td class="font-x vert-aligns" style="width:15%;">
+                                <i class="fa fa-thumbs-up fa-1x font-xs"></i> {{ article.pushUserIDs.length || 0 }} <br />
+                                <i class="fa fa-comment fa-1x font-xs"></i> {{ article.comments.length || 0 }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default" ng-init="isPanelCollapsed[1] = true">
+                <div class="panel-heading clickable" ng-click="isPanelCollapsed[1] = !isPanelCollapsed[1]">
+                    <span class="panel-title">本科系最新文章</span>
+                    <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[1]"></span>
+                    <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[1]"></span>
+                </div>
+                <div class="panel-content font-lg" uib-collapse="isPanelCollapsed[1]">
+                    <table class="table table-condensed table-hover no-margin">
+                        <tr class="clickable" ui-sref="article({ articleID:article.$id })" ng-repeat="article in articlesArray | filterBySpace: article.departments[0].name: ['keywords'] 
+                                                                                                                               | orderBy: ['-created'] | limitTo: 30">
+                            <td class="title hidden-md font-lg vert-align" style="width:55%;">{{ article.title | limitTo: 13 }} {{ article.title.length > 13 ? '...' : '' }}</td>
+                            <td class="title hidden-lg font-lg vert-align" style="width:35%;">{{ article.title | limitTo: 7 }} {{ article.title.length > 7 ? '...' : '' }}</td>
+                            <td class="vert-align" style="width:30%;">
+                                <span class="label label-default font-sm padding-5">
+                                    {{ article.departments[0].name }}
+                                </span>
+                            </td>
+                            <td class="font-x vert-aligns" style="width:15%;">
+                                <i class="fa fa-thumbs-up fa-1x font-xs"></i> {{ article.pushUserIDs.length || 0 }} <br />
+                                <i class="fa fa-comment fa-1x font-xs"></i> {{ article.comments.length || 0 }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

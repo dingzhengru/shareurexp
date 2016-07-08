@@ -1,0 +1,81 @@
+<div class="user-article-search" id="article-search-wrapper">
+    <div class="inner-addon right-addon">
+        <i class="glyphicon glyphicon-search" style="padding:10px; font-size: 22px;"></i>
+        <input type="text" ng-model="searchUserArticle" class="form-control input-lg" placeholder="搜尋文章"/>
+    </div>
+</div>
+
+<!--alert -->
+
+<div class="alert alert-info text-center" ng-show="(articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']).length <= 0">無資料</div>
+
+<!--alert -->
+
+<div class="user-articles-wrapper" ng-show="(articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']).length > 0">
+    <div class="row articles-header-row">
+        <div class="col-md-6 col-sm-12">
+            <div ng-include src="templates.orderOption"></div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <!-- 分頁 -->
+            <div class="text-right" ng-show="!isMobile.any()">
+                <uib-pagination total-items="(articlesArray | filterBySpace: searchArticle: ['title', 'keywords']).length"
+                                items-per-page="pageSize"     
+                                ng-model="currentPage"
+                                max-size="maxSize"
+                                class="pagination-sm"
+                                boundary-link-numbers="true"
+                                previous-text="上一頁"
+                                next-text="下一頁">
+                    
+                </uib-pagination>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <table class="table table-bordered table-hover user-articles-table" style="">
+            <thead>
+                <tr class="active">
+                    <th class="vert-align text-center" style="width:40%;">標題</th>
+                    <th class="vert-align text-center" style="width:10%;"><i class="fa fa-thumbs-up fa-1x"></i></th>
+                    <th class="vert-align text-center" style="width:10%;"><i class="fa fa-comment fa-1x"></i></th>
+                    <th class="vert-align text-center hidden-xs" style="width:15%;">發表時間</th>
+                    <th class="vert-align text-center hidden-lg hidden-md hidden-sm" style="width:35%;">發表時間</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="article in articlesArray | filterBySpace: searchUserArticle: ['title', 'keywords']
+                                                    | orderBy: currentOrderOption.key: currentOrderOption.reverse
+                                                    | limitTo: pageSize : pageStartItem(pageSize, currentPage)">
+                <td><a ui-sref="article({ articleID: article.$id })">{{ article.title }}</a></td>
+                <!--<td>-->
+                <!--    <a smooth-scroll-jquery target="article-search-wrapper" speed="1000" style="text-decoration: none;">-->
+                <!--        <span class="label label-info font-default" -->
+                <!--              ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" -->
+                <!--              ng-click="searchUserArticleByTag(tag.name)"-->
+                <!--              style="margin-right: 10px;cursor:pointer;">-->
+                <!--            {{ tag.name }}-->
+                <!--        </span>-->
+                <!--    </a>-->
+                <!--</td>-->
+                <td class="text-center" >{{ article.pushUserIDs.length || 0 }}</td>
+                <td class="text-center" >{{ article.comments.length || 0 }}</td>
+                <td class="text-center">{{ article.created | limitTo: 10 }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="text-right" ng-show="!isMobile.any()" style="margin-top: 5px;">
+        <uib-pagination total-items="(articlesArray | filterBySpace: searchArticle: ['title', 'keywords']).length"
+                        items-per-page="pageSize"     
+                        ng-model="currentPage"
+                        max-size="maxSize"
+                        class="pagination-sm"
+                        boundary-link-numbers="true"
+                        previous-text="上一頁"
+                        next-text="下一頁">
+            
+        </uib-pagination>
+    </div>
+</div>
+

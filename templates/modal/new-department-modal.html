@@ -1,0 +1,82 @@
+<div class="modal-header">
+    <h3 class="modal-title">新增標籤</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="newDepartmentForm" ng-submit="ok()" >
+        
+        <!--<div class="alert alert-info text-center">欄位階為必填、前兩個欄位只能填中文</div>-->
+        
+        <!-- department.name -->
+        <div class="form-group has-feedback">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" ng-class="{'has-error': newDepartmentForm.name.$invalid, 'has-success': newDepartmentForm.name.$valid }">
+                <label>標籤名稱</label>
+                <input type="text"
+                       name="name"
+                       ng-model="department.name"
+                       class="form-control"
+                       placeholder="例如: 中文系"
+                       ng-minlength="3"
+                       ng-required="true"
+                       ng-pattern="'^[\u4e00-\u9fa5]+系$'"
+                       autofocus/>
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="newDepartmentForm.name.$valid" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="newDepartmentForm.name.$invalid" aria-hidden="true"></span>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        
+        <!-- department.keywords -->
+        <div class="form-group has-feedback">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" ng-class="{'has-error': newDepartmentForm.keywords.$invalid, 'has-success': newDepartmentForm.keywords.$valid }">
+                <label>關鍵字</label>
+                <input type="text" 
+                       name="keywords" 
+                       ng-model="department.keywords"
+                       class="form-control" 
+                       placeholder="例如: 程式設計 管理"
+                       uib-popover="跟哪些字詞、專業會有關" 
+                       popover-trigger="focus"
+                       popover-placement="top" 
+                       ng-minlength="2"
+                       ng-required="true"
+                       ng-pattern="'^[\u4e00-\u9fa5 ]+$'"/>
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="newDepartmentForm.keywords.$valid" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="newDepartmentForm.keywords.$invalid" aria-hidden="true"></span>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" ng-class="{'has-error': newDepartmentForm.introduction.$invalid, 'has-success': newDepartmentForm.introduction.$valid }">
+                <label>簡介</label>
+                <input type="text" 
+                       name="introduction" 
+                       ng-model="department.introduction"
+                       class="form-control" 
+                       uib-popover="簡單介紹一下這個科系" 
+                       popover-trigger="focus"
+                       popover-placement="top" 
+                       placeholder="簡單介紹一下"
+                       ng-required="true"
+                       ng-pattern="'^[^a-zA-Z]+$'"/>
+                <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="newDepartmentForm.introduction.$valid" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="newDepartmentForm.introduction.$invalid" aria-hidden="true"></span>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <button type="submit" style="margin:0;padding:0;display:none;"></button>
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="row text-center">
+        <div class="col-sm-12" style="margin-bottom: 10px;">
+            {{ department }}
+            <button class="btn btn-success btn-block" type="button" ng-click="ok(department)">新增</button>
+        </div>
+        <div class="col-sm-12">
+            <button class="btn btn-default btn-block" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</div>

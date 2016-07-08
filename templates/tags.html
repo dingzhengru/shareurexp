@@ -1,0 +1,75 @@
+<div class="tag-search">
+    <div class="container tag-search-wrapper">
+        <div class="row tag-search-row">
+            <div class="col-sm-9 col-md-10">
+                <multiple-autocomplete ng-model="tagSelectedList"
+                                       object-property="name"
+                                       suggestions-arr="tagsArray"
+                                       is-hoverable="isHoverable"
+                                       is-disabled="isInputDisabled"
+                                       uib-popover="請點擊下面的標籤來進行搜尋"
+                                       popover-trigger="mouseenter click"
+                                       popover-placement="bottom">  <!-- 自己加的 看要不要加入hover事件 開啟下拉選單(手機建議停用) -->
+                </multiple-autocomplete>
+            </div>
+            <div class="col-sm-3 col-md-2">
+                <button ng-click="searchArticleByTags(tagSelectedList)" class="btn btn-default btn-lg btn-block">搜尋文章</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container tags-select-container">
+    <!--<h1>標籤列表</h1>-->
+    <div class="row tags-search-row">
+        <div class="col-sm-4">
+            <input type="text" ng-model="searchTag" class="form-control" placeholder="搜尋標籤 例如: 資訊 管理">
+        </div>
+    </div>
+    <div class="row tags-select-row">
+        <div class="col-md-3 col-sm-4 col-xs-12 tags-select"  ng-repeat="tag in tagsArray | filterBySpace: searchTag: ['name', 'keywords']  
+                                                                              | orderBy: ['order', 'name']
+                                                                              | limitTo: pageSize : pageStartItem(pageSize, currentPage)">
+            <h2 ng-show="!isTagSelected(tag)" class="hidden-xs">
+                <span class="label label-default clickable" 
+                      ng-click="addTag(tag)"
+                      ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }">
+                    {{ tag.name }} +</span>
+            </h2>
+            <h2 ng-show="isTagSelected(tag)" class="hidden-xs">
+                <span class="label label-danger clickable" ng-click="removeTagByTag(tag)">{{ tag.name }} X</span>
+            </h2>
+            
+            <!-- xs -->
+            <h1 ng-show="!isTagSelected(tag)" class="hidden-lg hidden-md hidden-sm text-center" style="margin-top: 10px;">
+                <span class="label label-default clickable"
+                      style="width: 90%;display:inline-block;"
+                      ng-click="addTag(tag)"
+                      ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }">{{ tag.name }} +</span>
+            </h1>
+            <h1 ng-show="isTagSelected(tag)" class="hidden-lg hidden-md hidden-sm text-center">
+                <span class="label label-danger clickable" style="width: 90%;display:inline-block;" ng-click="removeTagByTag(tag)">{{ tag.name }} X</span>
+            </h1>
+        </div>
+    </div>
+    
+    <div class="row tags-pagination-row" style="margin-top: 20px;" ng-show="!isMobile.any()">
+        <div class="col-sm-12">
+            <div class="text-right">
+                <uib-pagination total-items="(tagsArray | filterBySpace: searchTag: ['name', 'keywords']  | orderBy: ['order', 'name']).length"
+                                items-per-page="pageSize"     
+                                ng-model="currentPage"
+                                max-size="maxSize"
+                                class="pagination-sm"
+                                boundary-link-numbers="true"
+                                previous-text="上一頁"
+                                next-text="下一頁">
+                    
+                </uib-pagination>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+

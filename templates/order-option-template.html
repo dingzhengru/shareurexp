@@ -1,0 +1,21 @@
+<div class="btn-group hidden-xs  hidden-sm" uib-dropdown>
+    <button class="btn btn-default" uib-dropdown-toggle>
+        {{ currentOrderOption.name }}<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" uib-dropdown-menu>
+        <li ng-repeat="orderOption in orderOptions" >
+            <a href="" ng-click="selectOrderOption(orderOption)">{{ orderOption.name }}  </a>
+        </li>
+    </ul>
+</div>
+
+<div class="btn-group btn-block hidden-lg hidden-md" style="margin-bottom: 10px;" uib-dropdown>
+    <button class="btn btn-default btn-block" uib-dropdown-toggle>
+        {{ currentOrderOption.name }}<span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu btn-block" uib-dropdown-menu>
+        <li ng-repeat="orderOption in orderOptions" >
+            <a href="" ng-click="selectOrderOption(orderOption)">{{ orderOption.name }}  </a>
+        </li>
+    </ul>
+</div>

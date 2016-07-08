@@ -1,0 +1,112 @@
+<div class="container post-article-wrapper" ng-show="isLoaded">
+    
+    <!--<div class="alert alert-info text-center font-lg" style="margin-top:20px;margin-bottom:0px;">所有欄位皆為必填</div>-->
+    
+    <div class="alert alert-info text-center font-lg" style="margin-top:20px;margin-bottom:0px;">
+        發文內容請與所選分類相關
+    </div>
+    
+    <form class="editor-row post-article-form" name="postArticleForm" ng-submit="postArticle(article)">
+        
+        <!-- text editor -->
+        
+        <h2>撰寫文章</h2>
+        <div class="form-group has-feedback" ng-class="{'has-error': postArticleForm.title.$invalid, 'has-success': postArticleForm.title.$valid }">
+            <input type="text" 
+                   class="form-control font-lg" 
+                   name="title" 
+                   ng-model="article.title" 
+                   placeholder="最多50個字" 
+                   ng-required="true"
+                   ng-maxlength="50"
+                   autofocus/>
+            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="postArticleForm.title.$valid" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="postArticleForm.title.$invalid" aria-hidden="true"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <text-angular ta-toolbar="taOptions.toolbar"
+                          name="content"
+                          ng-model="article.content"
+                          required>
+                
+            </text-angular>
+            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="article.content.length > 0" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="article.content.length <= 0 || !article.content.length" aria-hidden="true"></span>
+        </div>
+        <!-- text editor -->
+        <!-- select tags -->
+        
+        <h2>選擇類型、科系、標籤</h2>
+        <div class="form-group">
+            <label ng-repeat="style in stylesArray" style="cursor:pointer;margin-right:10px;">
+                <checkbox large ng-model="style.isSelected" ng-change="changeStyle(stylesArray, style)"/> {{ style.name }} 
+            </label>
+        </div>
+        
+        <h3>
+            科系
+            <span ng-click="newDepartment('md')"
+                  class="font-default"
+                  style="cursor:pointer;border-bottom: 1px dotted #000;color:gray;"
+                  uib-tooltip="點擊這裡，可以新增科系"
+                  tooltip-placement="top"
+                  tooltip-trigger="mouseenter">沒有找到想要的科系嗎?
+            </span>
+        </h3>
+        <div class="form-group has-feedback departments-select" ng-class="{'has-error': article.departments.length <= 0 || !article.departments.length, 'has-success': article.departments.length > 0 }">
+            <multiple-autocomplete ng-model="article.departments"
+                                   object-property="name"
+                                   suggestions-arr="departmentsArray"
+                                   uib-popover="點擊裡面的小框可以搜尋、選擇"
+                                   popover-trigger="mouseenter click"
+                                   popover-placement="top"
+                                   is-hoverable="isHoverable"
+                                   is-disabled="article.departments.length >= 1 || false"
+                                   required>
+            </multiple-autocomplete>
+            <span class="fa fa-check fa-2x form-control-feedback" ng-show="article.departments.length > 0" style="padding-top: 5px;" aria-hidden="true"></span>
+            <span class="fa fa-times fa-2x form-control-feedback"  ng-show="article.departments.length <= 0 || !article.departments.length" style="padding-top: 5px;" aria-hidden="true"></span>
+        </div>
+        
+        <h3>
+            標籤
+            <span ng-click="newTag('md')"
+                  class="font-default"
+                  style="cursor:pointer;border-bottom: 1px dotted #000;color:gray;"
+                  uib-tooltip="點擊這裡，可以新增標籤"
+                  tooltip-placement="top"
+                  tooltip-trigger="mouseenter">沒有找到想要的標籤嗎?
+            </span>
+        </h3>
+        <div class="form-group has-feedback tags-select" ng-class="{'has-error': article.tags.length <= 0 || !article.tags.length, 'has-success': article.tags.length > 0 }">
+            <multiple-autocomplete ng-model="article.tags"
+                                   object-property="name"
+                                   suggestions-arr="tagsArray"
+                                   uib-popover="點擊裡面的小框可以搜尋、選擇"
+                                   popover-trigger="mouseenter click"
+                                   popover-placement="top"
+                                   is-hoverable="isHoverable"
+                                   is-disabled="false"
+                                   required>
+            </multiple-autocomplete>
+            <span class="fa fa-check fa-2x form-control-feedback" ng-show="article.tags.length > 0" style="padding-top: 5px;" aria-hidden="true"></span>
+            <span class="fa fa-times fa-2x form-control-feedback"  ng-show="article.tags.length <= 0 || !article.tags.length" style="padding-top: 5px;" aria-hidden="true"></span>
+        </div>
+        
+        <!-- select tags -->
+        <!-- submit button -->
+        
+        <div class="row button-row">
+            <div class="text-right" style="margin-top:20px;">
+                <button type="submit" class="hidden-xs hidden-sm btn btn-primary btn-lg">發表文章</button>
+                <button type="submit" class="hidden-lg hidden-md btn btn-primary btn-lg btn-block">發表文章</button>
+            </div>
+        </div>
+    </form>
+    
+    <!-- success -->
+    
+    <div class="alert alert-success text-center font-lg" ng-show="isPost">發表成功</div>
+    <div class="alert alert-success text-center font-lg" ng-show="isEdit">修改成功</div>
+    
+</div>

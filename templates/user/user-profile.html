@@ -1,0 +1,33 @@
+<div class="font-lg user-prfile">
+    <div class="row" style="">
+        <div class="col-md-12">
+           <div class="alert alert-info text-center">此頁面只有自己看的到，資料均來自於您的{{ user.provider }}帳戶 <br/> (修改您的{{ user.provider }}資料，這邊也會同步更新)</div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="table-responsive">
+        <table class="table table-custom-striped">
+            <tr>
+                <th>使用者ID({{ user.provider }})</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>使用者名稱</th>
+                <td>{{ user.displayName }}</td>
+            </tr>
+            <tr>
+                <th>性別</th>
+                <td>{{ user.cachedUserProfile.gender == 'male' ? '男' : '女' }}</td>
+            </tr>
+            <tr>
+                <th>信箱</th>
+                <td>{{ user.email}}</td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+
+<!--<pre ng-show="user">{{ getUserProfile() | json:4 }}</pre>-->

@@ -17,13 +17,11 @@
     <div class="row articles-header-row">
         <div class="col-xs-12 recommend-tags">
             <span style="font-sm">推薦標籤: </span>
-            <a smooth-scroll-jquery target="article-search-wrapper" speed="1000" style="text-decoration: none;">
-                <span class="label label-success font-sm" 
-                      ng-repeat="tag in tagsArray | filter: {order:0} | orderBy:['order', 'toString()']"
-                      ng-click="searchArticleByTag(tag.name, $event)">
-                    {{ tag.name }}
-                </span>
-            </a>
+            <span class="label label-success font-sm" 
+                  ng-repeat="tag in tagsArray | filter: {order:0} | orderBy:['order', 'toString()']"
+                  ng-click="searchArticleByTag(tag.name, $event)">
+                {{ tag.name }}
+            </span>
         </div>
         <div class="col-md-9 articles-left-side">
             <div class="row pagination-row">
@@ -72,14 +70,14 @@
                         </div>
                         <div class="col-md-4 col-lg-3">
                             <div class="article-tags">
-                                <a smooth-scroll-jquery target="article-search-wrapper" speed="1000" style="text-decoration: none;">
-                                    <span class="label font-default" 
-                                          ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }"
-                                          ng-repeat="tag in article.tags | orderBy:['order', 'toString()']"
-                                          ng-click="searchArticleByTag(tag.name, $event)">
-                                        {{ tag.name }}
-                                    </span>
-                                </a>
+                                <span class="label font-default" 
+                                      ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }"
+                                      ng-repeat="tag in article.tags | orderBy:['order', 'toString()']"
+                                      ng-click="searchArticleByTag(tag.name, $event)"
+                                      smooth-scroll-jquery 
+                                      target="article-search-wrapper">
+                                    {{ tag.name }}
+                                </span>
                             </div>
                             <i class="fa fa-user fa-1x"></i> 
                             <a ng-click="goState('user.articles', { userID: article.creator.uid }, $event)" class="font-default">{{ article.creator.displayName }}</a>
@@ -119,14 +117,14 @@
                         </div>
                         <div class="col-sm-4 col-xs-5">
                             <div class="article-tags">
-                                <a smooth-scroll-jquery target="article-search-wrapper" speed="1000" style="text-decoration: none;">
-                                    <span class="label font-default" 
-                                          ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }"
-                                          ng-repeat="tag in article.tags | orderBy:['order', 'toString()']"
-                                          ng-click="searchArticleByTag(tag.name, $event)">
-                                        {{ tag.name }}
-                                    </span>
-                                </a>
+                                <span class="label font-default" 
+                                      ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }"
+                                      ng-repeat="tag in article.tags | orderBy:['order', 'toString()']"
+                                      ng-click="searchArticleByTag(tag.name, $event)"
+                                      smooth-scroll-jquery 
+                                      target="article-search-wrapper">
+                                    {{ tag.name }}
+                                </span>
                             </div>
                         </div>
                     </div>

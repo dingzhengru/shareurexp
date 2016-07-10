@@ -36,12 +36,12 @@
             <hr>
             
             <div class="row article-button-row">
-                <div class="col-md-4 col-sm-4 col-xs-6 button-div" ng-mouseover="showPushPop = true" ng-mouseleave="showPushPop = false">
-                    <button class="btn btn-success btn-block font-lg"
+                <div class="col-md-4 col-sm-4 col-xs-6 button-div">
+                    <button class="btn btn-block font-lg"
+                            ng-class="{ 'btn-primary': isPushed(article, getAuth().uid), 'btn-success': !isPushed(article, getAuth().uid) }"
                             ng-click="pushArticle(article, getAuth().uid)"
-                            popover-is-open="showPushPop && getPopverContent(article)"
                             uib-popover="{{ getPopverContent(article) }}"
-                            popover-trigger="none">
+                            popover-trigger="focus">
                          推 <span class="badge">{{ article.pushUserIDs.length || 0}}</span>
                     </button>
                 </div>

@@ -15,14 +15,14 @@
 <div class="container articles-wrapper" ng-show="isLoaded">
     
     <div class="row articles-header-row">
-        <div class="col-xs-12 recommend-tags">
-            <span style="font-sm">推薦標籤: </span>
-            <span class="label label-success font-sm" 
-                  ng-repeat="tag in tagsArray | filter: {order:0} | orderBy:['order', 'toString()']"
-                  ng-click="searchArticleByTag(tag.name, $event)">
-                {{ tag.name }}
-            </span>
-        </div>
+        <!--<div class="col-xs-12 recommend-tags">-->
+        <!--    <span style="font-sm">推薦標籤: </span>-->
+        <!--    <span class="label label-success font-sm" -->
+        <!--          ng-repeat="tag in tagsArray | filter: {order:0} | orderBy:['order', 'toString()']"-->
+        <!--          ng-click="searchArticleByTag(tag.name, $event)">-->
+        <!--        {{ tag.name }}-->
+        <!--    </span>-->
+        <!--</div>-->
         <div class="col-md-9 articles-left-side">
             <div class="row pagination-row">
                 <div class="col-md-6 col-sm-12">

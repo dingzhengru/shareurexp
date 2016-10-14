@@ -5,7 +5,10 @@ $body-bg-color: #FAFAFA;
 $nav-height: 60px;
 
 // $header-bg: #2c3e50;
-$header-bg: url(http://i.imgur.com/sYcNHBQ.jpg) no-repeat center center fixed;
+// $header-bg: url(http://i.imgur.com/sYcNHBQ.jpg) no-repeat center center fixed;
+$header-bg: url(/img/bg01.png) no-repeat center center fixed;
+$header-mobile-bg: url(/img/bg05.png) no-repeat center center fixed;
+
 // $header-bg: url(/img/girl_books_arms_training_31461_1920x1200.jpg) no-repeat center;
 // $header-bg: url(http://beautifulhdwallpaper.com/wp-content/uploads/2014/09/Man-sleep-during-read-book-funny-photos.jpg) no-repeat center;
 
@@ -104,6 +107,31 @@ div, div.row, span, p{ word-break: break-all !important; }
 }
 
 // ============== nav
+.logo-icon {
+    position: relative;
+    top: -5px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    float: left;
+    display: block; /* This is required */
+    
+}
+
+.logo-icon.icon-home {
+    background: url(/img/logo_left.png);
+    // background: url(http://frederick-y.com/images/jquery-logo.png);
+    background-size: cover;
+}
+
+.logo-icon.normal {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    top: -12px;
+    left: 0px;
+}
 
 .notificationButton{  }
 .notifications-wrapper {
@@ -196,6 +224,8 @@ header {
     width: 100%;
     height: 100vh;
 }
+
+
 header:after {
     content : "";
     display: block;
@@ -211,11 +241,21 @@ header:after {
     height: 100%;
     z-index: -1;
     opacity : 0.75;
-    -webkit-filter: blur(4px);
+    -webkit-filter: blur(3px);
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+    header:after {
+        background: $header-mobile-bg; 
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+    }
 }
 
 header .intro-text {
-    padding-top: 30vh;
+    padding-top: 35vh;
 }
 
 header .intro-text > h1 {
@@ -232,7 +272,7 @@ header .intro-text > h3 {text-shadow: 2px 2px 3px rgba(0,0,0,0.6);}
     }
     header .intro-text {
         // padding: 200px 0px;
-        padding-top: 30vh;
+        padding-top: 35vh;
     }
     header .intro-text > h1 {
         margin: 0;

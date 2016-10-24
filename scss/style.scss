@@ -6,8 +6,13 @@ $nav-height: 60px;
 
 // $header-bg: #2c3e50;
 // $header-bg: url(http://i.imgur.com/sYcNHBQ.jpg) no-repeat center center fixed;
-$header-bg: url(http://i.imgur.com/sLvZQkn.png) no-repeat center center fixed;
-$header-mobile-bg: url(http://i.imgur.com/feh2q7G.png) no-repeat center center fixed;
+
+// bg01 bg05
+$header-bg: url(http://i.imgur.com/PPdzy4i.png) no-repeat center center fixed;
+$header-mobile-bg: url(http://i.imgur.com/gAjjjFz.png) no-repeat center center fixed;
+
+// logo_left
+$logo-icon: url(http://i.imgur.com/fto60u7.png);
 
 // $header-bg: url(/img/girl_books_arms_training_31461_1920x1200.jpg) no-repeat center;
 // $header-bg: url(http://beautifulhdwallpaper.com/wp-content/uploads/2014/09/Man-sleep-during-read-book-funny-photos.jpg) no-repeat center;
@@ -120,7 +125,7 @@ div, div.row, span, p{ word-break: break-all !important; }
 }
 
 .logo-icon.icon-home {
-    background: url(http://i.imgur.com/z049aAP.png);
+    background: $logo-icon;
     // background: url(http://frederick-y.com/images/jquery-logo.png);
     background-size: cover;
 }
@@ -244,7 +249,7 @@ header:after {
     -webkit-filter: blur(3px);
 }
 
-@media only screen and (min-width : 320px) and (max-width : 480px) {
+@media only screen and (max-width : 767px) {
     header:after {
         background: $header-mobile-bg; 
         background-size: cover;

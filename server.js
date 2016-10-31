@@ -69,7 +69,6 @@ app.post('/contact-us', function(request, response) {
 });
 
 app.post('/report-article', function(request, response) {
-    
     let report = request.body.report;
     
     let  transporter = nodemailer.createTransport(smtpConfig);

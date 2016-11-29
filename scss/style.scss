@@ -92,6 +92,7 @@ div, div.row, span, p{ word-break: break-all !important; }
     box-shadow: 0px 0px 10px 3px #888888; 
     background: white;
     min-height: 700px;
+    // border: 1px black solid;
 }
 
 @media (min-width: 768px) {
@@ -212,7 +213,7 @@ footer {color: white;}
 footer h3 {margin-bottom: 20px;}
 
 footer .footer-above {padding-top: 50px; background-color: #0B4C5F;  line-height: 30px;}
-footer .footer-above .footer-col {margin-bottom: 50px;}
+footer .footer-above .footer-col {margin-bottom: 50px; border: 1px black ;}
 footer .footer-above h3 { text-align: center; }
 footer .footer-above p { font-size: $font-default ; text-align: left; }
 
@@ -266,10 +267,11 @@ header .intro-text {
 header .intro-text > h1 {
     margin: 0;
     font-size: 50px;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    text-shadow: 3px 3px 3px rgba(0,0,0,0.6);
+    font-weight: bold;
     
 }
-header .intro-text > h3 {text-shadow: 2px 2px 3px rgba(0,0,0,0.6);}
+header .intro-text > h3 {text-shadow: 3px 3px 3px rgba(0,0,0,0.6); color: white; font-weight: bold;}
 
 @media (min-width: 768px) {
     header {
@@ -341,19 +343,19 @@ section:nth-child(odd) {background: $section-bg;}
 .article-wrapper .article-row .article-left-wrapper {  }
 .article-wrapper .article-row .article-left-wrapper .article-intro { padding-bottom: 20px; }
 .article-wrapper .article-row .article-left-wrapper .article-intro div.well { margin-bottom: 0px; }
-.article-wrapper .article-row .article-left-wrapper .article-title { font-size: $font-default + 8; font-weight: bold;}
+.article-wrapper .article-row .article-left-wrapper .article-title { font-size: $font-default + 24; font-weight: bold;}
 .article-wrapper .article-row .article-left-wrapper .article-creator { padding-bottom: 10px;}
-.article-wrapper .article-row .article-left-wrapper .article-tags { padding-bottom: 15px; }
+.article-wrapper .article-row .article-left-wrapper .article-tags { padding-top: 15px; padding-bottom: 0px; margin-bottom: 0px; }
 .article-wrapper .article-row .article-left-wrapper .article-tags .label { margin: 0px 5px 5px 0px;padding: 8px;cursor: pointer;display: inline-block; }
 .article-wrapper .article-row .article-left-wrapper .article-tags .label:hover { color: black; }
-.article-wrapper .article-row .article-left-wrapper .article-content { }
+.article-wrapper .article-row .article-left-wrapper .article-content { margin-top: 10px; }
 .article-wrapper .article-row .article-left-wrapper .article-content p { font-size: $font-default; }
-.article-wrapper .article-row .article-left-wrapper .article-created { margin-top: 20px;}
+.article-wrapper .article-row .article-left-wrapper .article-created { }
 .article-wrapper .article-row .article-left-wrapper .article-edited { }
 .article-wrapper .article-row .article-left-wrapper .article-button-row {  }
 .article-wrapper .article-row .article-left-wrapper .article-button-row > div.button-div { padding-top: 10px; padding-bottom: 10px; }
 .article-wrapper .article-row .article-left-wrapper .article-button-row > div.button-div span.badge { margin-bottom: 2px; display: inline-block; }
-.article-wrapper .article-row .article-left-wrapper .article-comment-wrapper  { padding-top: 20px; }
+.article-wrapper .article-row .article-left-wrapper .article-comment-wrapper  { padding-top: 0px; }
 .article-wrapper .article-row .article-left-wrapper .article-comment-wrapper .post-comment-row  {  }
 .article-wrapper .article-row .article-left-wrapper .article-comment-wrapper .post-comment-row div  {  }
 .article-wrapper .article-row .article-left-wrapper .article-comment-wrapper .comment-list-row  { padding: 10px 0px 20px 0px; }
@@ -364,7 +366,7 @@ section:nth-child(odd) {background: $section-bg;}
 .article-wrapper .article-right-side .panel { margin-bottom: 10px; }
 .article-wrapper .article-right-side .panel .panel-heading { cursor:pointer; position:relative; font-weight: bold; }
 .article-wrapper .article-right-side .panel .panel-heading .panel-right-icon { position:absolute; right: 10px; top: 13px; }
-.article-wrapper .article-right-side .panel .panel-content { line-height: 10px; }
+.article-wrapper .article-right-side .panel .panel-content { line-height: 10px; font-size: 14px; }
 .article-wrapper .article-right-side .panel .panel-content:hover { }
 .article-wrapper .article-right-side .panel .panel-content .table{ table-layout: fixed; word-wrap: break-word;}
 .article-wrapper .article-right-side .panel .panel-content .table tr td{vertical-align: top;}

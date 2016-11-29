@@ -1,39 +1,50 @@
 <div class="container article-wrapper" ng-show="isLoaded">
     <div class="row article-row">
-        <div class="col-md-9 article-left-wrapper">
-            <div class="article-intro text-center" style="padding-bottom:20px;">
-                <button type="button" class="btn btn-default btn-block" ng-init="isIntroCollapsed = true" ng-click="isIntroCollapsed = !isIntroCollapsed">
-                    {{ article.departments[0].name }}簡介 <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </button>
-            	<div uib-collapse="isIntroCollapsed">
-            		<div class="well well-lg">{{ article.departments[0].introduction }}</div>
-            	</div>
+        <div class="col-md-8 article-left-wrapper">
+            <!--<div class="article-intro text-center" style="padding-bottom:20px;">-->
+            <!--    <button type="button" class="btn btn-default btn-block" ng-init="isIntroCollapsed = true" ng-click="isIntroCollapsed = !isIntroCollapsed">-->
+            <!--        {{ article.departments[0].name }}簡介 <i class="fa fa-caret-down" aria-hidden="true"></i>-->
+            <!--    </button>-->
+            <!--	<div uib-collapse="isIntroCollapsed">-->
+            <!--		<div class="well well-lg">{{ article.departments[0].introduction }}</div>-->
+            <!--	</div>-->
+            <!--</div>-->
+            <div>
+                <span class="article-title">{{ article.title }}</span>
+                <i class="fa fa-user fa-1x"></i> <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a>
             </div>
-            <div class="article-title">{{ article.title }}</div>
             <div class="row">
-                <div class="col-xs-6 article-creator">
-                    <i class="fa fa-user fa-1x"></i> <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a>
-                </div>
-                <div class="col-xs-6 text-right">
+                <!--<div class="col-xs-6 article-creator">-->
+                <!--    <i class="fa fa-user fa-1x"></i> <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a>-->
+                <!--</div>-->
+                <div class="col-xs-12 text-left">
                     <i class="fa fa-clock-o fa-1x"></i> <span class="article-created font-sm">{{ article.created | limitTo:16 }}</span>
-                    <i class="fa fa-pencil-square-o hidden-xs"></i> <span class="article-edited font-sm hidden-xs" ng-show="article.edited">{{ article.edited | limitTo:16 }}</span>
+                </div>
+                <div class="col-xs-12 text-left">
+                    <span ng-show="article.edited">
+                        <i class="fa fa-pencil-square-o hidden-xs"></i>
+                        <span class="article-edited font-sm hidden-xs">{{ article.edited | limitTo:16 }}</span>
+                    </span>
                 </div>
             </div>
             <!--<div class="article-creator"><i class="fa fa-user fa-1x"></i> <a ui-sref="user.articles({ userID: article.creator.uid })" class="font-default">{{ article.creator.displayName }}</a></div>-->
-            <div class="article-tags">
-                <span class="glyphicon glyphicon-tags font-xs"> </span> 
-                <span class="label label-info"
-                      ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" 
-                      ui-sref="articles({ searchArticle: tag.name })">
-                    {{ tag.name }}
-                </span>
-            </div>
+            
             <!--<div class="article-content font-lg" ng-bind-html="article.content"></div>-->
             <div class="article-content font-lg" ta-bind ng-model="article.content"></div>
             <!--<div class="article-created font-sm text-right">發表時間: {{ article.created }}</div>-->
             <!--<div class="article-edited font-sm text-right hidden-xs hidden-sm" ng-show="article.edited">編輯時間: {{ article.edited || '' }}</div>-->
             
-            <hr>
+            <div class="article-tags">
+                <span class="glyphicon glyphicon-tags font-xs"> </span> 
+                <span class="label"
+                      ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }"
+                      ng-repeat="tag in article.tags | orderBy:['order', 'toString()']" 
+                      ui-sref="articles({ searchArticle: tag.name })">
+                    {{ tag.name }}
+                </span>
+            </div>
+            
+            <hr style="padding-top: 0px; margin-top: 5px; margin-bottom: 10px;">
             
             <div class="row article-button-row">
                 <div class="col-md-4 col-sm-4 col-xs-6 button-div">
@@ -53,6 +64,8 @@
                     <button class="btn btn-primary btn-block font-lg">編輯</button>
                 </div>
             </div>
+            
+            
             
             <!-- comment -->
             
@@ -77,7 +90,7 @@
                 
                 <div class="alert alert-success text-center" ng-show="isPostArticleComment">發表成功</div>
                 
-                <hr>
+                <hr style="margin-top: 10px;">
                 
                 <!--comment-list -->
                 
@@ -101,53 +114,67 @@
             </div>
             
         </div>
-        <div class="col-md-3 hidden-xs hidden-sm article-right-side">
+        <div class="col-md-4 hidden-xs hidden-sm article-right-side">
+            
             <div class="panel panel-default" ng-init="isPanelCollapsed[0] = true">
-                <div class="panel-heading clickable" ng-click="isPanelCollapsed[0] = !isPanelCollapsed[0]">
-                    <span class="panel-title">本科系熱門文章</span>
+                <div class="panel-heading clickable" ng-init="isPanelCollapsed[0] = true" ng-click="isPanelCollapsed[0] = !isPanelCollapsed[0]">
+                    <span class="panel-title">{{ article.departments[0].name }}簡介</span>
                     <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[0]"></span>
                     <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[0]"></span>
                 </div>
-                <div class="panel-content font-lg" uib-collapse="isPanelCollapsed[0]">
+                <div class="panel-body font-default" uib-collapse="isPanelCollapsed[0]">
+                        {{ article.departments[0].introduction }}
+                </div>
+            </div>
+            
+            <div class="panel panel-default" ng-init="isPanelCollapsed[0] = true">
+                
+                <div class="panel-heading clickable" ng-init="isPanelCollapsed[1] = true" ng-click="isPanelCollapsed[1] = !isPanelCollapsed[1]">
+                    <span class="panel-title">本科系熱門文章</span>
+                    <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[1]"></span>
+                    <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[1]"></span>
+                </div>
+                <div class="panel-content" uib-collapse="isPanelCollapsed[1]">
                     <table class="table table-condensed table-hover no-margin">
                         <tr class="clickable" ui-sref="article({ articleID:article.$id })" ng-repeat="article in articlesArray | filterBySpace: article.departments[0].name: ['keywords']
                                                                                                                                | orderBy: ['pushUserIDs.length || 0', 'comments.length || 0', 'created']: true 
                                                                                                                                | limitTo: 30">
-                            <td class="title hidden-md font-lg vert-align" style="width:55%;">{{ article.title | limitTo: 13 }} {{ article.title.length > 13 ? '...' : '' }}</td>
-                            <td class="title hidden-lg font-lg vert-align" style="width:35%;">{{ article.title | limitTo: 7 }} {{ article.title.length > 7 ? '...' : '' }}</td>
-                            <td class="vert-align" style="width:30%;">
-                                <span class="label label-default font-sm padding-5">
-                                    {{ article.departments[0].name }}
-                                </span>
-                            </td>
+                            <td class="title hidden-md vert-align" style="width:55%;">{{ article.title | limitTo: 13 }} {{ article.title.length > 13 ? '...' : '' }}</td>
+                            <td class="title hidden-lg vert-align" style="width:35%;">{{ article.title | limitTo: 7 }} {{ article.title.length > 7 ? '...' : '' }}</td>
+                            <!--<td class="vert-align" style="width:30%;">-->
+                            <!--    <span class="label label-default font-sm padding-5">-->
+                            <!--        {{ article.departments[0].name }}-->
+                            <!--    </span>-->
+                            <!--</td>-->
                             <td class="font-x vert-aligns" style="width:15%;">
-                                <i class="fa fa-thumbs-up fa-1x font-xs"></i> {{ article.pushUserIDs.length || 0 }} <br />
+                                <i class="fa fa-thumbs-up fa-1x font-xs"></i> {{ article.pushUserIDs.length || 0 }} 
                                 <i class="fa fa-comment fa-1x font-xs"></i> {{ article.comments.length || 0 }}
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div class="panel panel-default" ng-init="isPanelCollapsed[1] = true">
-                <div class="panel-heading clickable" ng-click="isPanelCollapsed[1] = !isPanelCollapsed[1]">
+            <div class="panel panel-default" ng-init="isPanelCollapsed[2] = true">
+                <div class="panel-heading clickable" ng-click="isPanelCollapsed[2] = !isPanelCollapsed[2]">
                     <span class="panel-title">本科系最新文章</span>
-                    <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[1]"></span>
-                    <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[1]"></span>
+                    <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[2]"></span>
+                    <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[2]"></span>
                 </div>
-                <div class="panel-content font-lg" uib-collapse="isPanelCollapsed[1]">
+                <div class="panel-content" uib-collapse="isPanelCollapsed[2]">
                     <table class="table table-condensed table-hover no-margin">
                         <tr class="clickable" ui-sref="article({ articleID:article.$id })" ng-repeat="article in articlesArray | filterBySpace: article.departments[0].name: ['keywords'] 
                                                                                                                                | orderBy: ['-created'] | limitTo: 30">
-                            <td class="title hidden-md font-lg vert-align" style="width:55%;">{{ article.title | limitTo: 13 }} {{ article.title.length > 13 ? '...' : '' }}</td>
-                            <td class="title hidden-lg font-lg vert-align" style="width:35%;">{{ article.title | limitTo: 7 }} {{ article.title.length > 7 ? '...' : '' }}</td>
-                            <td class="vert-align" style="width:30%;">
-                                <span class="label label-default font-sm padding-5">
-                                    {{ article.departments[0].name }}
-                                </span>
-                            </td>
-                            <td class="font-x vert-aligns" style="width:15%;">
-                                <i class="fa fa-thumbs-up fa-1x font-xs"></i> {{ article.pushUserIDs.length || 0 }} <br />
-                                <i class="fa fa-comment fa-1x font-xs"></i> {{ article.comments.length || 0 }}
+                            <td class="title hidden-md vert-align" style="width:55%;">{{ article.title | limitTo: 15 }} {{ article.title.length > 13 ? '...' : '' }}</td>
+                            <td class="title hidden-lg vert-align" style="width:35%;">{{ article.title | limitTo: 10 }} {{ article.title.length > 7 ? '...' : '' }}</td>
+                            <!--<td class="vert-align" style="width:30%;">-->
+                            <!--    <span class="label label-default font-sm padding-5">-->
+                            <!--        {{ article.departments[0].name }}-->
+                            <!--    </span>-->
+                            <!--</td>-->
+                            <td class="font-x vert-aligns" style="width:20%;">
+                                <!--<i class="fa fa-thumbs-up fa-1x font-xs"></i> {{ article.pushUserIDs.length || 0 }}-->
+                                <!--<i class="fa fa-comment fa-1x font-xs"></i> {{ article.comments.length || 0 }}-->
+                                <span class="fa fa-clock-o fa-1x"></span> {{ getFromNow(article.created, "YYYY-MM-DD hh:mm:ss") }}
                             </td>
                         </tr>
                     </table>

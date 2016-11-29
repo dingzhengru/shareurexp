@@ -157,7 +157,7 @@ modalsApp.controller('ModalReportArticleCtrl', function ($scope, $http, $uibModa
     $scope.isSendSuccess = false;
 
     $scope.ok = function (report) {
-        $http.post('http://shareurexp.tw/report-article', { 'report': report }).success(function () {
+        $http.post('http://university-research-dingzhengru.c9users.io:8080/report-article', { 'report': report }).success(function () {
             $scope.isSendSuccess = true;
             $timeout(function () {
                 return $uibModalInstance.close([]);

@@ -92,9 +92,19 @@ var userApp = angular.module('userApp', ['ui.router', 'ui.bootstrap', 'firebase'
     }).state('user.profile', {
         url: '/profile',
         templateUrl: 'templates/user/user-profile.html',
-        controller: function controller($scope, $state) {
+        controller: function controller($scope, $state, $firebaseObject) {
             if (!$scope.isAuthSelf($scope.userID)) $state.go('user.articles', { userID: $scope.userID });
             $scope.setPageTitle('你的資料');
+
+            var userSyncObject = $firebaseObject(usersRef.child($scope.userID));
+
+            $scope.isDisplayNameChange = false;
+
+            $scope.changeDisplayName = function (name) {
+                userSyncObject.displayName = name;
+                userSyncObject.$save();
+                $scope.isDisplayNameChange = true;
+            };
         }
     }).state('user.notifications', {
         url: '/notifications',

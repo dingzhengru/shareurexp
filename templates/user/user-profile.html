@@ -15,7 +15,17 @@
             </tr>
             <tr>
                 <th>使用者名稱</th>
-                <td>{{ user.displayName }}</td>
+                <td>
+                    <form class="form-inline" ng-submit="changeDisplayName(user.displayName)">
+                        <input type="text" class="form-control" ng-model="user.displayName"/>
+                        <button type="submit" class="btn btn-warning">修改</button>
+                        <div class="alert alert-success text-center font-default" 
+                             style="display:inline-block;padding:8px 12px; font-weight:bold; margin:0px"
+                             ng-show="isDisplayNameChange">
+                            修改成功
+                        </div>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <th>性別</th>

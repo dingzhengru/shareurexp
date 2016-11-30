@@ -23,7 +23,7 @@
         <!--        {{ tag.name }}-->
         <!--    </span>-->
         <!--</div>-->
-        <div class="col-md-9 articles-left-side">
+        <div class="col-md-8 articles-left-side">
             <div class="row pagination-row">
                 <div class="col-md-6 col-sm-12">
                     <div ng-include src="templates.orderOption"></div>
@@ -56,19 +56,19 @@
                 
                 <div class="articles-desktop hidden-xs hidden-sm">
                     <div class="row"> 
-                        <div class="col-md-8 col-lg-9">
+                        <div class="col-md-7 col-lg-8">
                             <div class="article-title">
                                 <a ui-sref="article({ articleID: article.$id })" class="hidden-lg">{{ article.title | limitTo: 19 }} {{ article.title.length > 19 ? '...' : '' }}</a>
                                 <a ui-sref="article({ articleID: article.$id })" class="hidden-md">{{ article.title | limitTo: 27 }} {{ article.title.length > 27 ? '...' : '' }}</a>
                             </div>
                             <div class="article-content">
-                                <span class="hidden-md" ng-bind-html="cutArticleContent(article.content) | limitTo: 155"></span>
-                                <span class="hidden-md">{{ cutArticleContent(article.content).length > 155 ? '...' : '' }}</span>
-                                <span class="hidden-lg" ng-bind-html="cutArticleContent(article.content) | limitTo: 110"></span>
-                                <span class="hidden-lg">{{ cutArticleContent(article.content).length > 110 ? '...' : '' }}</span>
+                                <span class="hidden-md" ng-bind-html="cutArticleContent(article.content) | limitTo: 50"></span>
+                                <span class="hidden-md">{{ cutArticleContent(article.content).length > 50 ? '...' : '' }}</span>
+                                <span class="hidden-lg" ng-bind-html="cutArticleContent(article.content) | limitTo: 40"></span>
+                                <span class="hidden-lg">{{ cutArticleContent(article.content).length > 40 ? '...' : '' }}</span>
                             </div>
                         </div>
-                        <div class="col-md-4 col-lg-3">
+                        <div class="col-md-5 col-lg-4">
                             <div class="article-tags">
                                 <span class="label font-default" 
                                       ng-class="{ 'label-success': tag.order == 0, 'label-info': tag.order == 1, 'label-default': tag.order == 2 }"
@@ -102,10 +102,10 @@
                         </div>
                         <div class="col-sm-8 col-xs-7">
                             <div class="article-content">
-                                <span class="hidden-xs" ng-bind-html="cutArticleContent(article.content) | limitTo: 57"></span>
-                                <span class="hidden-xs">{{ cutArticleContent(article.content).length > 57 ? '...' : '' }}</span>
-                                <span class="hidden-sm" ng-bind-html="cutArticleContent(article.content) | limitTo: 26"></span>
-                                <span class="hidden-sm">{{ cutArticleContent(article.content).length > 26 ? '...' : '' }}</span>
+                                <span class="hidden-xs" ng-bind-html="cutArticleContent(article.content) | limitTo: 25"></span>
+                                <span class="hidden-xs">{{ cutArticleContent(article.content).length > 25 ? '...' : '' }}</span>
+                                <span class="hidden-sm" ng-bind-html="cutArticleContent(article.content) | limitTo: 15"></span>
+                                <span class="hidden-sm">{{ cutArticleContent(article.content).length > 15 ? '...' : '' }}</span>
                             </div>
                             <i class="fa fa-user fa-1x"></i> 
                             <a ng-click="goState('user.articles', { userID: article.creator.uid }, $event)" class="font-default">{{ article.creator.displayName }}</a>
@@ -146,26 +146,9 @@
             </div>
         </div>
         <!-- Right Side -->
-        <div class="col-md-3 articles-right-side hidden-xs hidden-sm">
+        <div class="col-md-4 articles-right-side hidden-xs hidden-sm">
             
-            <div class="panel panel-default" ng-init="isPanelCollapsed[2] = true">
-                <div class="panel-heading" ng-click="isPanelCollapsed[2] = !isPanelCollapsed[2]">
-                    <span class="panel-title">科系列表</span>
-                    <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[2]"></span>
-                    <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[2]"></span>
-                </div>
-                <div class="panel-content font-lg" uib-collapse="isPanelCollapsed[2]">
-                    <table class="table table-condensed table-hover no-margin">
-                        <tr class="clickable" ng-click="searchArticleByTag(department.name, $event)" ng-repeat="department in departmentsArray" smooth-scroll-jquery target="article-search-wrapper">
-                            <td class="text-center">
-                                <span class="label label-info font-lg" style="display:inline-block; width:80%;">
-                                    {{ department.name }}
-                                </span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            
             
             <div class="panel panel-default" ng-init="isPanelCollapsed[0] = true">
                 <div class="panel-heading" ng-click="isPanelCollapsed[0] = !isPanelCollapsed[0]">
@@ -212,6 +195,25 @@
                             <!--    <i class="fa fa-thumbs-up fa-1x font-xs"></i> {{ article.pushUserIDs.length || 0 }} <br />-->
                             <!--    <i class="fa fa-comment fa-1x font-xs"></i> {{ article.comments.length || 0 }}-->
                             <!--</td>-->
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="panel panel-default" ng-init="isPanelCollapsed[2] = true">
+                <div class="panel-heading" ng-click="isPanelCollapsed[2] = !isPanelCollapsed[2]">
+                    <span class="panel-title">科系列表</span>
+                    <span class="panel-right-icon fa fa-plus fa-1x" ng-show="isPanelCollapsed[2]"></span>
+                    <span class="panel-right-icon fa fa-minus fa-1x" ng-show="!isPanelCollapsed[2]"></span>
+                </div>
+                <div class="panel-content font-lg" uib-collapse="isPanelCollapsed[2]">
+                    <table class="table table-condensed table-hover no-margin">
+                        <tr class="clickable" ng-click="searchArticleByTag(department.name, $event)" ng-repeat="department in departmentsArray" smooth-scroll-jquery target="article-search-wrapper">
+                            <td class="text-center">
+                                <span class="label label-info font-lg" style="display:inline-block; width:80%;">
+                                    {{ department.name }}
+                                </span>
+                            </td>
                         </tr>
                     </table>
                 </div>

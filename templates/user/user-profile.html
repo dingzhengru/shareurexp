@@ -18,11 +18,21 @@
                 <td>
                     <form class="form-inline" ng-submit="changeDisplayName(user.displayName)">
                         <input type="text" class="form-control" ng-model="user.displayName"/>
-                        <button type="submit" class="btn btn-warning">修改</button>
-                        <div class="alert alert-success text-center font-default" 
-                             style="display:inline-block;padding:8px 12px; font-weight:bold; margin:0px"
-                             ng-show="isDisplayNameChange">
-                            修改成功
+                        <div class="hidden-xs hidden-sm" style="display:inline-block;">
+                            <button type="submit" class="btn btn-warning">修改</button>
+                            <div class="alert alert-success text-center font-default" 
+                                 style="display:inline-block;padding:8px 12px; font-weight:bold; margin:0px;"
+                                 ng-show="isDisplayNameChange">
+                                修改成功
+                            </div>
+                        </div>
+                        <div class="hidden-lg hidden-md" style="margin-top: 5px;">
+                            <button type="submit" class="btn btn-warning">修改</button>
+                            <div class="alert alert-success text-center font-default hidden-lg hidden-md" 
+                                 style="display:inline-block;padding:8px 12px; font-weight:bold; margin:0px"
+                                 ng-show="isDisplayNameChange">
+                                修改成功
+                            </div>
                         </div>
                     </form>
                 </td>

@@ -40,7 +40,7 @@ modalsApp.controller('ModalLoginCtrl', function ($scope, $uibModal, $uibModalIns
             userObject.$loaded().then(function () {
                 if (userObject.email) {
                     userObject.email = authData.facebook.email;
-                    userObject.displayName = authData.facebook.displayName;
+                    // userObject.displayName = authData.facebook.displayName;
                     userObject.$save(userObject);
 
                     user = userObject;
@@ -68,7 +68,7 @@ modalsApp.controller('ModalLoginCtrl', function ($scope, $uibModal, $uibModalIns
             userObject.$loaded().then(function () {
                 if (userObject.email) {
                     userObject.email = authData.google.email;
-                    userObject.displayName = authData.google.displayName;
+                    // userObject.displayName = authData.google.displayName;
                     userObject.$save(userObject);
 
                     user = userObject;

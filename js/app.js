@@ -218,25 +218,17 @@ var mainApp = angular.module('mainApp', ['modalsApp',
                     let addedNotificationUserIDs = []
                     article.comments.forEach((commentItem) => {
                         if(addedNotificationUserIDs.indexOf(commentItem.creator.uid) >= 0) return;
-                        // if(commentItem.creator.uid != articleComment.creator.uid) {
-                        //     $scope.addNotification(commentItem.creator.uid, {
-                        //         articleID: article.$id,
-                        //         title: article.title + ' 有了新的留言',
-                        //         created: $scope.getNowDate(),
-                        //         isRead: false
-                        //     });
-                        // }
-                        if(commentItem.creator.uid == articleComment.creator.uid) {
-                            console.log(commentItem.creator.uid, articleComment.creator.uid)
-                            return;
-                        } else if(commentItem.creator.uid != articleComment.creator.uid) {
+                        if(commentItem.creator.uid != articleComment.creator.uid) {
                             $scope.addNotification(commentItem.creator.uid, {
                                 articleID: article.$id,
                                 title: article.title + ' 有了新的留言',
                                 created: $scope.getNowDate(),
                                 isRead: false
                             });
-                        } else {
+                            addedNotificationUserIDs.push(commentItem.creator.uid);
+                        } 
+                        if(addedNotificationUserIDs.indexOf(commentItem.creator.uid) >= 0) return;
+                        if(commentItem.creator.uid != article.creator.uid){
                             $scope.addNotification(article.creator.uid, {
                                 articleID: article.$id,
                                 title: article.title + ' 有了新的留言',

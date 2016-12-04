@@ -225,8 +225,9 @@ var mainApp = angular.module('mainApp', ['modalsApp', 'userApp', 'ui.router', 'u
                     //     });
                     // }
                     if (commentItem.creator.uid == articleComment.creator.uid) {
+                        console.log(commentItem.creator.uid, articleComment.creator.uid);
                         return;
-                    } else if (commentItem.creator.uid != article.creator.uid) {
+                    } else if (commentItem.creator.uid != articleComment.creator.uid) {
                         $scope.addNotification(commentItem.creator.uid, {
                             articleID: article.$id,
                             title: article.title + ' 有了新的留言',

@@ -218,13 +218,31 @@ var mainApp = angular.module('mainApp', ['modalsApp',
                     let addedNotificationUserIDs = []
                     article.comments.forEach((commentItem) => {
                         if(addedNotificationUserIDs.indexOf(commentItem.creator.uid) >= 0) return;
-                        if(commentItem.creator.uid != articleComment.creator.uid) 
+                        // if(commentItem.creator.uid != articleComment.creator.uid) {
+                        //     $scope.addNotification(commentItem.creator.uid, {
+                        //         articleID: article.$id,
+                        //         title: article.title + ' 有了新的留言',
+                        //         created: $scope.getNowDate(),
+                        //         isRead: false
+                        //     });
+                        // }
+                        if(commentItem.creator.uid == articleComment.creator.uid) {
+                            return;
+                        } else if(commentItem.creator.uid != article.creator.uid) {
                             $scope.addNotification(commentItem.creator.uid, {
                                 articleID: article.$id,
                                 title: article.title + ' 有了新的留言',
                                 created: $scope.getNowDate(),
                                 isRead: false
                             });
+                        } else {
+                            $scope.addNotification(article.creator.uid, {
+                                articleID: article.$id,
+                                title: article.title + ' 有了新的留言',
+                                created: $scope.getNowDate(),
+                                isRead: false
+                            });
+                        }
                         addedNotificationUserIDs.push(commentItem.creator.uid);
                     })
                 }
@@ -667,6 +685,7 @@ var mainApp = angular.module('mainApp', ['modalsApp',
             if(!user.notifications) user.notifications = [];
             user.notifications.push(notification);
             user.$save(user);
+            
         })
     };
     $scope.readAllNotifications = function(user, notReadCount) {

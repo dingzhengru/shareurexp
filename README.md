@@ -6,6 +6,8 @@ ShareEXP
 
 讓這個平台降低高中生因為選錯科系導致之後休學或是讀的不開心的情況。
 
+前端使用Bootstrap與Angular建立
+
 後端伺服器使用Node.Js建立
 
 資料庫使用Firebase儲存(現在已被Google收購，測試資料已遺失)

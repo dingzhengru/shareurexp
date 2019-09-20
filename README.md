@@ -1,2 +1,10 @@
-# university-research-app
-university-research-app
+此大學期末專題為經驗分享與教學平台，使用者可以透過GOOGLE或是FB做登入
+
+分享在大學期間所學的經驗，或是寫些教學文章讓有相當興趣的使用者去做交流。
+
+讓這個平台降低高中生因為選錯科系導致之後休學或是讀的不開心的情況。
+
+後端伺服器使用Node.Js建立
+
+資料庫使用Firebase儲存(現在已被Google收購，測試資料已遺失)
+
